@@ -17,7 +17,8 @@ services:
 
 
  nexus:
-   image: sonatype/nexus
+   build :/repoDepend
+   #image: sonatype/nexus
    volumes:
      - "nexus-data:/sonatype-work"
    ports:
