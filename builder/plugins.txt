@@ -1,0 +1,7 @@
+maven-plugin:2.7.1
+ant:1.3
+mesos:0.13.0
+tfs:5.3.4
+nexus-jenkins-plugin:1.2.20170428-142845.cb63c9e
+pmd:3.48
+deploy:1.10
