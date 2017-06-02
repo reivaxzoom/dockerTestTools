@@ -1,5 +1,6 @@
 version: "2"
 services:
+
  glassfish:
    build: ./server
    #image: glassfish3:v4
@@ -16,18 +17,15 @@ services:
 #      - '/home/ingsoluciones/builder-TesterComposeDocker/repo/installers:/var/www:ro' 
 
 
+
  nexus:
-   build :/repoDepend
-   #image: sonatype/nexus
-   volumes:
-     - "nexus-data:/sonatype-work"
+   #build: ./repoDepend
+   image: sonatype/nexus
    ports:
      - "6091:8081"
-  
    volumes:
      - /home/ingsoluciones/nexusData:/sonatype-work
 
- 
  jenkins:
     build: ./builder
     #image: 'jenk-mvn-git-nex:v1'
@@ -37,4 +35,4 @@ services:
       - "50000:50000"
       - "6090:8080"
     volumes:
-      - /home/ingsoluciones/jenkinsDockerVolume/jobs:/var/jenkins_home/jobs
+      - "/home/ingsoluciones/jenkinsDockerVolume/jobs:/var/jenkins_home/jobs"

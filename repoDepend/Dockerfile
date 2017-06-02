@@ -1,6 +1,8 @@
-FROM sonatype/nexus
-COPY ./lib/ /tmp
-CMD["/tmp/lib/install.sh"]
+#FROM sonatype/nexus
+#COPY ./lib_es /tmp
+#ONRUN /tmp/install.sh
+
+
 
  
 
