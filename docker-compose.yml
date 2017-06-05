@@ -24,7 +24,7 @@ services:
    ports:
      - "6091:8081"
    volumes:
-     - /home/ingsoluciones/nexusData:/sonatype-work
+     - /opt/dockerVol/nexusData:/sonatype-work
 
  jenkins:
     build: ./builder
@@ -35,4 +35,4 @@ services:
       - "50000:50000"
       - "6090:8080"
     volumes:
-      - "/home/ingsoluciones/jenkinsDockerVolume/jobs:/var/jenkins_home/jobs"
+      - "/opt/dockerVol/jenkinsData/jobs:/var/jenkins_home/jobs"
