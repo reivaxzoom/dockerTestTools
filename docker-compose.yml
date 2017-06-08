@@ -34,5 +34,6 @@ services:
     ports:
       - "50000:50000"
       - "6090:8080"
+      - "6091:6091"
     volumes:
       - "/opt/dockerVol/jenkinsData/jobs:/var/jenkins_home/jobs"

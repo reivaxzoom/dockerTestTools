@@ -18,6 +18,17 @@ RUN wget -q -O $GLASSFISH_PKG $GLASSFISH_URL && \
     find . -name '*.bat' -delete && \
     find . -name '*.exe' -delete
 
+RUN echo "--- Setup the password file ---" && \
+    echo "AS_ADMIN_PASSWORD=" > /tmp/glassfishpwd && \
+    echo "AS_ADMIN_NEWPASSWORD=${PASSWORD}" >> /tmp/glassfishpwd  && \
+    echo "--- Enable DAS, change admin password, and secure admin access ---" && \
+    asadmin --user=admin --passwordfile=/tmp/glassfishpwd change-admin-password --domain_name domain1 && \
+    asadmin start-domain && \
+    echo "AS_ADMIN_PASSWORD=${PASSWORD}" > /tmp/glassfishpwd && \
+    asadmin --user=admin --passwordfile=/tmp/glassfishpwd enable-secure-admin && \
+    asadmin --user=admin stop-domain && \
+    rm /tmp/glassfishpwd
+
 # Ports being exposed
 EXPOSE 4848 8080 8181
 
