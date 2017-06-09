@@ -1,6 +1,6 @@
 version: "2"
-services:
 
+services:
  glassfish:
    build: ./server
    #image: glassfish3:v4
@@ -8,7 +8,8 @@ services:
      - "8080:8080"
      - "4848:4848"
    volumes:
-     - /opt/dockerVol/glassfish:/usr/local/glassfish3/glassfish
+     - /opt/dockerVol/glassfish/autodeploy:/usr/local/glassfish3/glassfish/domains/domain1/autodeploy
+
 #apache:
 #    #build : ./repo
 #     image: trinitronx/python-simplehttpserver
@@ -32,10 +33,11 @@ services:
     #image: 'jenk-mvn-git-nex:v1'
     environment:
       JAVA_OPTS: "-Djava.awt.headless=true"
+    links:
+      - nexus 
     ports:
       - "50000:50000"
       - "6090:8080"
-      - "6091:6091"
     volumes:
-      - "/opt/dockerVol/jenkinsData/jobs:/var/jenkins_home/jobs"
-      - "/opt/dockerVol/glassfish:/opt/glassfish"
+      - /opt/dockerVol/jenkinsData/jobs:/var/jenkins_home/jobs
+      - /opt/dockerVol/glassfish/Autodeploy:/opt/dockerVol/glassfish/deploy
