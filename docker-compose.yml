@@ -7,7 +7,8 @@ services:
    ports:
      - "8080:8080"
      - "4848:4848"
-
+   volumes:
+     - /opt/dockerVol/glassfish:/usr/local/glassfish3/glassfish
 #apache:
 #    #build : ./repo
 #     image: trinitronx/python-simplehttpserver
@@ -37,3 +38,4 @@ services:
       - "6091:6091"
     volumes:
       - "/opt/dockerVol/jenkinsData/jobs:/var/jenkins_home/jobs"
+      - "/opt/dockerVol/glassfish:/opt/glassfish"
