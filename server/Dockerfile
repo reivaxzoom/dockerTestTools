@@ -38,20 +38,12 @@ WORKDIR /usr/local/glassfish3
 
 # Copy in and set the entrypoint
 #COPY docker-entrypoint.sh $GLASSFISH_HOME/
-#RUN ["chmod", "+x", "/usr/local/glassfish3/docker-entrypoint.sh"]
-#ENTRYPOINT ["/usr/local/glassfish3/docker-entrypoint.sh"]
+RUN ["chmod", "+x", "/usr/local/glassfish3/docker-entrypoint.sh"]
+ENTRYPOINT ["/usr/local/glassfish3/docker-entrypoint.sh"]
 
 
 # Start the GlassFish domain
 CMD ["asadmin", "start-domain", "--verbose"]
-RUN asadmin create-jdbc-connection-pool --datasourceclassname com.microsoft.sqlserver.jdbc.SQLServerDataSource --restype javax.sql.DataSource --property user=migracion:password='migra$2k12':DatabaseName=proteus:ServerName=172.22.16.73:port=1433 proteus 
-RUN asadmin create-jdbc-resource --connectionpoolid proteus jdbc/proteus 
-RUN asadmin ping-connection-pool proteus  
-RUN asadmin create-jms-resource --restype javax.jms.ConnectionFactory --description "Cola de mesajeria para proteus"  jms/proteusConnectionFactory                                              
-RUN asadmin create-jms-resource --restype javax.jms.Topic --property Name=proteusCargaMasivaTramiteQueue --description "Cola carga masiva tramite" jms/proteusCargaMasivaTramiteQueue           
-RUN asadmin create-jms-resource --restype javax.jms.Topic --property Name=proteusCargaMasivaTramiteQueue --description "Cola geeracion de carga masiva claves" jms/proteusGenMasivaClavesQueue  
-RUN asadmin create-jms-resource --restype javax.jms.Topic --property Name=proteusCargaMasivaTramiteQueue --description "Cola generacion nomina" jms/proteusGeneracionNominaQueue                
-RUN asadmin create-javamail-resource --mailhost 172.20.24.44 --mailuser sigen --description mailResourceProteus --fromaddress sigen@quito.gob.ec mail/proteus                                   
-CMD ["asadmin", "start-domain", "--verbose"]
+
 
 
