@@ -7,8 +7,9 @@ services:
    ports:
      - "8080:8080"
      - "4848:4848"
-   volumes:
-     - /opt/dockerVol/glassfish/autodeploy:/usr/local/glassfish3/glassfish/domains/domain1/autodeploy
+     - "222:22"
+   #volumes:
+   #  - /opt/dockerVol/glassfish/autodeploy:/usr/local/glassfish3/glassfish/domains/domain1/autodeploy
 
 #apache:
 #    #build : ./repo
