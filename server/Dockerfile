@@ -43,7 +43,7 @@ WORKDIR /usr/local/glassfish3
 
 
 # Start the GlassFish domain
-RUN asadmin start-domain --verbose
+CMD ["asadmin", "start-domain", "--verbose"]
 RUN asadmin create-jdbc-connection-pool --datasourceclassname com.microsoft.sqlserver.jdbc.SQLServerDataSource --restype javax.sql.DataSource --property user=migracion:password='migra$2k12':DatabaseName=proteus:ServerName=172.22.16.73:port=1433 proteus 
 RUN asadmin create-jdbc-resource --connectionpoolid proteus jdbc/proteus 
 RUN asadmin ping-connection-pool proteus  
