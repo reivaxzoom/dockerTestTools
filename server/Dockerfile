@@ -44,5 +44,14 @@ WORKDIR /usr/local/glassfish3
 
 # Start the GlassFish domain
 CMD ["asadmin", "start-domain", "--verbose"]
+CMD ["asadmin","create-jdbc-connection-pool --datasourceclassname com.microsoft.sqlserver.jdbc.SQLServerDataSource --restype javax.sql.DataSource --property user=migracion:password='migra$2k12':DatabaseName=proteus:ServerName=172.22.16.73:port=1433 proteus "]
+CMD ["asadmin","create-jdbc-resource --connectionpoolid proteus jdbc/proteus "]
+CMD ["asadmin","restart-domain domain1 "]
+CMD ["asadmin","ping-connection-pool proteus  "]
+CMD ["asadmin","create-jms-resource --restype javax.jms.ConnectionFactory --description "Cola de mesajeria para proteus"  jms/proteusConnectionFactory                                              "]
+CMD ["asadmin","create-jms-resource --restype javax.jms.Topic --property Name=proteusCargaMasivaTramiteQueue --description "Cola carga masiva tramite" jms/proteusCargaMasivaTramiteQueue           "]
+CMD ["asadmin","create-jms-resource --restype javax.jms.Topic --property Name=proteusCargaMasivaTramiteQueue --description "Cola geeracion de carga masiva claves" jms/proteusGenMasivaClavesQueue  "]
+CMD ["asadmin","create-jms-resource --restype javax.jms.Topic --property Name=proteusCargaMasivaTramiteQueue --description "Cola generacion nomina" jms/proteusGeneracionNominaQueue                "]
+CMD ["asadmin","create-javamail-resource --mailhost 172.20.24.44 --mailuser sigen --description mailResourceProteus --fromaddress sigen@quito.gob.ec mail/proteus                                   "]
 
 
