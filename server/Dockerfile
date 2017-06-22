@@ -52,6 +52,5 @@ CMD ["asadmin","create-jms-resource --restype javax.jms.Topic --property Name=pr
 CMD ["asadmin","create-jms-resource --restype javax.jms.Topic --property Name=proteusCargaMasivaTramiteQueue --description "Cola geeracion de carga masiva claves" jms/proteusGenMasivaClavesQueue  "]
 CMD ["asadmin","create-jms-resource --restype javax.jms.Topic --property Name=proteusCargaMasivaTramiteQueue --description "Cola generacion nomina" jms/proteusGeneracionNominaQueue                "]
 CMD ["asadmin","create-javamail-resource --mailhost 172.20.24.44 --mailuser sigen --description mailResourceProteus --fromaddress sigen@quito.gob.ec mail/proteus                                   "]
-CMD ["asadmin","stop-domain domain1 "]
-CMD ["asadmin", "start-domain", "--verbose"]
+CMD ["asadmin", "restart-domain", "--verbose"]
 
