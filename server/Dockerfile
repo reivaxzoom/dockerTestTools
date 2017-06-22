@@ -32,7 +32,7 @@ RUN wget -q -O $GLASSFISH_PKG $GLASSFISH_URL && \
 #    rm /tmp/glassfishpwd && \\
 
 # Ports being exposed
-EXPOSE 4848 8080 8181
+EXPOSE 22 4848 8080 8181
 
 WORKDIR /usr/local/glassfish3
 
