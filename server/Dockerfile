@@ -38,6 +38,7 @@ WORKDIR /usr/local/glassfish3
 
 # Copy in and set the entrypoint
 COPY docker-entrypoint.sh $GLASSFISH_HOME/
+COPY glassfishpwd $GLASSFISH_HOME/
 #RUN ["chmod", "+x", "/usr/local/glassfish3/docker-entrypoint.sh"]
 #ENTRYPOINT ["/usr/local/glassfish3/docker-entrypoint.sh"]
 
