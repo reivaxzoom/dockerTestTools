@@ -1,8 +1,4 @@
 !/bin/bash
-# DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
-# 
-# Copyright (c) 2017 Oracle and/or its affiliates. All rights reserved.
-
 
 asadmin create-jdbc-connection-pool --datasourceclassname com.microsoft.sqlserver.jdbc.SQLServerDataSource --restype javax.sql.DataSource --property user=migracion:password='migra$2k12':DatabaseName=proteus:ServerName=172.22.16.73:port=1433 proteus 
 asadmin create-jdbc-resource --connectionpoolid proteus jdbc/proteus 
