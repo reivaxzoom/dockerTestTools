@@ -42,4 +42,27 @@ services:
       - "6090:8080"
     volumes:
       - /opt/dockerVol/jenkinsData/jobs:/var/jenkins_home/jobs
-      - /opt/dockerVol/glassfish/Autodeploy:/opt/dockerVol/glassfish/deploy
+      #- /opt/dockerVol/glassfish/Autodeploy:/opt/dockerVol/glassfish/deploy
+
+  selhub:  
+    image: selenium/hub
+    ports:
+      - 4444:4444
+
+  nodeff:  
+    image: selenium/node-firefox-debug
+    ports:
+      - 5900
+    links:
+      - selhub:hub
+
+  nodechrome:  
+    image: selenium/node-chrome-debug
+    ports:
+      - 5900
+    links:
+      - selhub:hub
+      
+      
+      
+      
