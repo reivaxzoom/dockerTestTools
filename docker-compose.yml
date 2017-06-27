@@ -50,9 +50,9 @@ services:
     privileged: true
     ports:
       - 4444:4444
-      environment:
-        - GRID_TIMEOUT=120000
-        - GRID_BROWSER_TIMEOUT=120000
+    environment:
+      - GRID_TIMEOUT=120000
+      - GRID_BROWSER_TIMEOUT=120000
     networks:
         - selenium_grid_internal
 
