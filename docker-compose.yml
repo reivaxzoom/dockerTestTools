@@ -8,7 +8,7 @@ services:
      - "8080:8080"
      - "4848:4848"
      - "222:22"
-     - "9999-15000:9999-15000"
+    # - "9999-15000:9999-15000"
    #volumes:
    #  - /opt/dockerVol/glassfish/autodeploy:/usr/local/glassfish3/glassfish/domains/domain1/autodeploy
 
@@ -44,24 +44,24 @@ services:
       - /opt/dockerVol/jenkinsData/jobs:/var/jenkins_home/jobs
       #- /opt/dockerVol/glassfish/Autodeploy:/opt/dockerVol/glassfish/deploy
 
-  selhub:  
-    image: selenium/hub
-    ports:
-      - 4444:4444
+ selhub:  
+   image: selenium/hub
+   ports:
+     - 4444:4444
 
-  nodeff:  
-    image: selenium/node-firefox-debug
-    ports:
-      - 5900
-    links:
-      - selhub:hub
+ nodeff:  
+   image: selenium/node-firefox-debug
+   ports:
+     - 5900
+   links:
+     - selhub:hub
 
-  nodechrome:  
-    image: selenium/node-chrome-debug
-    ports:
-      - 5900
-    links:
-      - selhub:hub
+# nodechrome:  
+  # image: selenium/node-chrome-debug
+  # ports:
+  #   - 5900
+  # links:
+  #   - selhub:hub
       
       
       
