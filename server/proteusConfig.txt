@@ -7,9 +7,7 @@ create-jms-resource --restype javax.jms.Topic --property Name=proteusCargaMasiva
 create-jms-resource --restype javax.jms.Topic --property Name=proteusCargaMasivaTramiteQueue --description "Cola generacion nomina" jms/proteusGeneracionNominaQueue                
 create-javamail-resource --mailhost 172.20.24.44 --mailuser sigen --description mailResourceProteus --fromaddress sigen@quito.gob.ec mail/proteus                                   
 
-change-admin-password --user admin 
-eable-secure-admin
---user admin --passwordfile /usr/local/glassfish3/glassfishpwd.txt change-admin-password --domain_name domain1
-enable-secure-admin --user=admin --passwordfile=glassfishpwd 
+change-admin-password --user admin --passwordfile /usr/local/glassfish3/glassfishpwd.txt change-admin-password --domain_name domain1
+enable-secure-admin --user=admin --passwordfile=glassfishpwd.txt 
 restart-domain
 ping-connection-pool proteus 
