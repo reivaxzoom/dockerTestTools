@@ -8,7 +8,7 @@ create-jms-resource --restype javax.jms.Topic --property Name=proteusCargaMasiva
 create-javamail-resource --mailhost 172.20.24.44 --mailuser sigen --description mailResourceProteus --fromaddress sigen@quito.gob.ec mail/proteus                                   
 
 change-admin-password --user admin  --domain_name domain1
-enable-secure-admin --user=admin 
+enable-secure-admin --user=admin --port 4848
 
 
 
