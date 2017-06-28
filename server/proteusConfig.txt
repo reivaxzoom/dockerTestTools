@@ -7,8 +7,10 @@ create-jms-resource --restype javax.jms.Topic --property Name=proteusCargaMasiva
 create-jms-resource --restype javax.jms.Topic --property Name=proteusCargaMasivaTramiteQueue --description "Cola generacion nomina" jms/proteusGeneracionNominaQueue                
 create-javamail-resource --mailhost 172.20.24.44 --mailuser sigen --description mailResourceProteus --fromaddress sigen@quito.gob.ec mail/proteus                                   
 
-enable-secure-admin --user=admin 
 change-admin-password --user admin  --domain_name domain1
+enable-secure-admin --user=admin 
+
+
 
 restart-domain
 ping-connection-pool proteus 
