@@ -9,6 +9,5 @@ create-javamail-resource --mailhost 172.20.24.44 --mailuser sigen --description 
 
 --user admin --passwordfile glassfishpwd.txt change-admin-password --domain_name domain1
 enable-secure-admin --user=admin --passwordfile=glassfishpwd 
-stop-domain
-start-domain
+restart-domain
 ping-connection-pool proteus 
