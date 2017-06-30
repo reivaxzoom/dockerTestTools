@@ -1,0 +1,16 @@
+create-jdbc-connection-pool --datasourceclassname com.microsoft.sqlserver.jdbc.SQLServerDataSource --restype javax.sql.DataSource --property user=migracion:password='migra$2k12':DatabaseName=proteus:ServerName=172.22.16.73:port=1433 proteus 
+create-jdbc-resource --connectionpoolid proteus jdbc/proteus 
+
+create-jms-resource --restype javax.jms.ConnectionFactory --description "Cola de mesajeria para proteus"  jms/proteusConnectionFactory                                              
+create-jms-resource --restype javax.jms.Topic --property Name=proteusCargaMasivaTramiteQueue --description "Cola carga masiva tramite" jms/proteusCargaMasivaTramiteQueue           
+create-jms-resource --restype javax.jms.Topic --property Name=proteusCargaMasivaTramiteQueue --description "Cola geeracion de carga masiva claves" jms/proteusGenMasivaClavesQueue  
+create-jms-resource --restype javax.jms.Topic --property Name=proteusCargaMasivaTramiteQueue --description "Cola generacion nomina" jms/proteusGeneracionNominaQueue                
+create-javamail-resource --mailhost 172.20.24.44 --mailuser sigen --description mailResourceProteus --fromaddress sigen@quito.gob.ec mail/proteus                                   
+
+change-admin-password --user admin  --domain_name domain1
+enable-secure-admin --user=admin --port 4848
+
+
+
+restart-domain
+ping-connection-pool proteus 

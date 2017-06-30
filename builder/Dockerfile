@@ -125,8 +125,8 @@ RUN unzip -o $GLASSFISH_PKG -d /usr/local && \
     find . -name '*.bat' -delete && \
     find . -name '*.exe' -delete
    
-#COPY proteusConfig.txt $GLASSFISH_HOME/
-#COPY glassfishpwd $GLASSFISH_HOME/    
+COPY proteusConfig.txt $GLASSFISH_HOME/
+COPY glassfishpwd $GLASSFISH_HOME/    
 
   
 
