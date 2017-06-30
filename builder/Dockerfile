@@ -8,7 +8,7 @@ ARG uid=1000
 ARG gid=1000
 ARG http_port=8080
 ARG agent_port=50000
-ARG gf_port=4848
+
 
 
 ENV JENKINS_HOME /var/jenkins_home
@@ -110,7 +110,7 @@ ENV GLASSFISH_PKG=/tmp/glassfish-3.1.2.2.zip \
     MD5=ae8e17e9dcc80117cb4b39284302763f \
     PATH=$PATH:/usr/local/glassfish3/bin
 
-
+RUN chown -R ${user} "$GLASSFISH_HOME" /opt/glassfish
 # Download and install GlassFish
 RUN wget -q -O $GLASSFISH_PKG $GLASSFISH_URL && \
     echo "$MD5 *$GLASSFISH_PKG" | md5sum -c - && \
