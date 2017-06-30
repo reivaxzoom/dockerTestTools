@@ -113,7 +113,9 @@ ENV GLASSFISH_PKG=/tmp/glassfish-3.1.2.2.zip \
 
 # Download and install GlassFish
 RUN wget -q -O $GLASSFISH_PKG $GLASSFISH_URL && \
-    echo "$MD5 *$GLASSFISH_PKG" | md5sum -c - && \
+    echo "$MD5 *$GLASSFISH_PKG" | md5sum -c -
+
+ RUN chown -R ${user} $GLASSFISH_PKG 
     #chown -R root /tmp/glassfish-3.1.2.2.zip && \
     #unzip -o $GLASSFISH_PKG -d /usr/local && \
     #rm -f $GLASSFISH_PKG && \
@@ -123,8 +125,8 @@ RUN wget -q -O $GLASSFISH_PKG $GLASSFISH_URL && \
     #find . -name '*.bat' -delete && \
     #find . -name '*.exe' -delete
    
-COPY proteusConfig.txt $GLASSFISH_HOME/
-COPY glassfishpwd $GLASSFISH_HOME/    
+#COPY proteusConfig.txt $GLASSFISH_HOME/
+#COPY glassfishpwd $GLASSFISH_HOME/    
 
   
 
