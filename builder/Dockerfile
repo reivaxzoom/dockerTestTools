@@ -114,11 +114,15 @@ ENV GLASSFISH_PKG=/tmp/glassfish-3.1.2.2.zip \
 # Download and install GlassFish
 RUN wget -q -O $GLASSFISH_PKG $GLASSFISH_URL && \
     echo "$MD5 *$GLASSFISH_PKG" | md5sum -c -
+RUN mkdir  $GLASSFISH_HOME 
+    
+RUN chown -R ${user} $GLASSFISH_HOME 
 
-RUN chown -R ${user} $GLASSFISH_PKG 
+
   
-RUN unzip -o $GLASSFISH_PKG -d /usr/local && \
-    rm -f $GLASSFISH_PKG && \
+RUN unzip -o $GLASSFISH_PKG -d /usr/local 
+
+RUN rm -f $GLASSFISH_PKG && \
     
     # Remove Windows .bat and .exe files to save space
     cd $GLASSFISH_HOME && \
