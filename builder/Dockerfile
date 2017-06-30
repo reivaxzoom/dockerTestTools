@@ -115,15 +115,15 @@ ENV GLASSFISH_PKG=/tmp/glassfish-3.1.2.2.zip \
 RUN wget -q -O $GLASSFISH_PKG $GLASSFISH_URL && \
     echo "$MD5 *$GLASSFISH_PKG" | md5sum -c -
 
- RUN chown -R ${user} $GLASSFISH_PKG 
-    #chown -R root /tmp/glassfish-3.1.2.2.zip && \
-    #unzip -o $GLASSFISH_PKG -d /usr/local && \
-    #rm -f $GLASSFISH_PKG && \
+RUN chown -R ${user} $GLASSFISH_PKG 
+  
+RUN unzip -o $GLASSFISH_PKG -d /usr/local && \
+    rm -f $GLASSFISH_PKG && \
     
     # Remove Windows .bat and .exe files to save space
-    #cd $GLASSFISH_HOME && \
-    #find . -name '*.bat' -delete && \
-    #find . -name '*.exe' -delete
+    cd $GLASSFISH_HOME && \
+    find . -name '*.bat' -delete && \
+    find . -name '*.exe' -delete
    
 #COPY proteusConfig.txt $GLASSFISH_HOME/
 #COPY glassfishpwd $GLASSFISH_HOME/    
