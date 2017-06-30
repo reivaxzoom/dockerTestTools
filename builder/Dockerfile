@@ -106,11 +106,11 @@ RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/ref/plugins.txt
 #Install glassfish for remote deployment
 ENV GLASSFISH_PKG=/tmp/glassfish-3.1.2.2.zip \
     GLASSFISH_URL=http://download.java.net/glassfish/3.1.2.2/release/glassfish-3.1.2.2.zip \
-    GLASSFISH_HOME=/opt/glassfish3 \
+    GLASSFISH_HOME=/usr/local/glassfish3 \
     MD5=ae8e17e9dcc80117cb4b39284302763f \
     PATH=$PATH:/usr/local/glassfish3/bin
 
-
+RUN chown -R ${user} "$GLASSFISH_HOME" /usr/local/glassfish3 
 # Download and install GlassFish
 RUN wget -q -O $GLASSFISH_PKG $GLASSFISH_URL && \
     echo "$MD5 *$GLASSFISH_PKG" | md5sum -c - && \
@@ -121,7 +121,7 @@ RUN wget -q -O $GLASSFISH_PKG $GLASSFISH_URL && \
     cd $GLASSFISH_HOME && \
     find . -name '*.bat' -delete && \
     find . -name '*.exe' -delete
-RUN chown -R ${user} "$GLASSFISH_HOME" /opt/glassfish3    
+   
 COPY proteusConfig.txt $GLASSFISH_HOME/
 COPY glassfishpwd $GLASSFISH_HOME/    
 
