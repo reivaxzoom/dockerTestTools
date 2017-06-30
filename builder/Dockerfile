@@ -88,22 +88,7 @@ EXPOSE ${http_port}
 # will be used by attached slave agents:
 EXPOSE ${agent_port}
 
-ENV COPY_REFERENCE_FILE_LOG $JENKINS_HOME/copy_reference_file.log
 
-USER ${user}
-
-COPY jenkins-support /usr/local/bin/jenkins-support
-COPY jenkins.sh /usr/local/bin/jenkins.sh
-ENTRYPOINT ["/bin/tini", "--", "/usr/local/bin/jenkins.sh"]
-
-# from a derived Dockerfile, can use `RUN plugins.sh active.txt` to setup /usr/share/jenkins/ref/plugins from a support bundle
-COPY plugins.sh /usr/local/bin/plugins.sh
-COPY install-plugins.sh /usr/local/bin/install-plugins.sh
-COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
-RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/ref/plugins.txt
-
-
-#RUN chmod +x plugins.sh active.txt
 
 #Install glassfish for remote deployment
 ENV GLASSFISH_PKG=/tmp/glassfish-3.1.2.2.zip \
@@ -135,6 +120,30 @@ RUN rm -f $GLASSFISH_PKG && \
 ENV PATH="/o"    
 COPY proteusConfig.txt $GLASSFISH_HOME/
 COPY glassfishpwd $GLASSFISH_HOME/    
+
+
+
+#starting entry secuence
+
+
+ENV COPY_REFERENCE_FILE_LOG $JENKINS_HOME/copy_reference_file.log
+
+USER ${user}
+
+COPY jenkins-support /usr/local/bin/jenkins-support
+COPY jenkins.sh /usr/local/bin/jenkins.sh
+ENTRYPOINT ["/bin/tini", "--", "/usr/local/bin/jenkins.sh"]
+
+# from a derived Dockerfile, can use `RUN plugins.sh active.txt` to setup /usr/share/jenkins/ref/plugins from a support bundle
+COPY plugins.sh /usr/local/bin/plugins.sh
+COPY install-plugins.sh /usr/local/bin/install-plugins.sh
+COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
+RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/ref/plugins.txt
+
+
+#RUN chmod +x plugins.sh active.txt
+
+
 
   
 
