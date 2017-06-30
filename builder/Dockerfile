@@ -125,6 +125,6 @@ RUN wget -q -O $GLASSFISH_PKG $GLASSFISH_URL && \
 COPY proteusConfig.txt $GLASSFISH_HOME/
 COPY glassfishpwd $GLASSFISH_HOME/    
 
-EXPOSE ${gf_port}    
+  
 
 
