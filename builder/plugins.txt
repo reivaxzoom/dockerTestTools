@@ -1,4 +1,4 @@
-maven-plugin:2.15.1
+maven-plugin:2.16
 ant:1.5
 mesos:0.14.1
 tfs:5.3.4
