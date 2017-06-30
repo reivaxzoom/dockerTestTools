@@ -2,7 +2,7 @@ FROM openjdk:8-jdk
 
 RUN apt-get update && apt-get install -y git curl && rm -rf /var/lib/apt/lists/*
 
-ARG user=root
+ARG user=jenkins
 ARG group=jenkins
 ARG uid=1000
 ARG gid=1000
@@ -115,13 +115,13 @@ ENV GLASSFISH_PKG=/tmp/glassfish-3.1.2.2.zip \
 RUN wget -q -O $GLASSFISH_PKG $GLASSFISH_URL && \
     echo "$MD5 *$GLASSFISH_PKG" | md5sum -c - && \
     #chown -R root /tmp/glassfish-3.1.2.2.zip && \
-    unzip -o $GLASSFISH_PKG -d /usr/local && \
-    rm -f $GLASSFISH_PKG && \
-    \
+    #unzip -o $GLASSFISH_PKG -d /usr/local && \
+    #rm -f $GLASSFISH_PKG && \
+    
     # Remove Windows .bat and .exe files to save space
-    cd $GLASSFISH_HOME && \
-    find . -name '*.bat' -delete && \
-    find . -name '*.exe' -delete
+    #cd $GLASSFISH_HOME && \
+    #find . -name '*.bat' -delete && \
+    #find . -name '*.exe' -delete
    
 COPY proteusConfig.txt $GLASSFISH_HOME/
 COPY glassfishpwd $GLASSFISH_HOME/    
