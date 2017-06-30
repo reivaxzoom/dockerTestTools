@@ -110,10 +110,11 @@ ENV GLASSFISH_PKG=/tmp/glassfish-3.1.2.2.zip \
     MD5=ae8e17e9dcc80117cb4b39284302763f \
     PATH=$PATH:/usr/local/glassfish3/bin
 
-RUN chown -R ${user} /usr/local/glassfish3 
+
 # Download and install GlassFish
 RUN wget -q -O $GLASSFISH_PKG $GLASSFISH_URL && \
     echo "$MD5 *$GLASSFISH_PKG" | md5sum -c - && \
+    chown -R ${user} $GLASSFISH_PKG
     unzip -o $GLASSFISH_PKG -d /usr/local && \
     rm -f $GLASSFISH_PKG && \
     \
