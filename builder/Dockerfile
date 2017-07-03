@@ -77,6 +77,12 @@ ENV GLASSFISH_PKG=/tmp/glassfish-3.1.2.2.zip \
     MD5=ae8e17e9dcc80117cb4b39284302763f \
     PATH=$PATH:/usr/local/glassfish3/bin
 
+    
+ # could use ADD but this one does not check Last-Modified header neither does it allow to control checksum 
+# see https://github.com/docker/docker/issues/8331
+RUN curl -fsSL ${JENKINS_URL} -o /usr/share/jenkins/jenkins.war \
+  && echo "${JENKINS_SHA}  /usr/share/jenkins/jenkins.war" | sha256sum -c -   
+    
 
 # Download and install GlassFish
 RUN wget -q -O $GLASSFISH_PKG $GLASSFISH_URL && \
@@ -100,10 +106,7 @@ COPY glassfishpwd $GLASSFISH_HOME/
 
 
 
-# could use ADD but this one does not check Last-Modified header neither does it allow to control checksum 
-# see https://github.com/docker/docker/issues/8331
-RUN curl -fsSL ${JENKINS_URL} -o /usr/share/jenkins/jenkins.war \
-  && echo "${JENKINS_SHA}  /usr/share/jenkins/jenkins.war" | sha256sum -c -
+
 
 ENV JENKINS_UC https://updates.jenkins.io
 RUN chown -R ${user} "$JENKINS_HOME" /usr/share/jenkins/ref
