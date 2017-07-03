@@ -83,6 +83,8 @@ ENV GLASSFISH_PKG=/tmp/glassfish-3.1.2.2.zip \
 RUN curl -fsSL ${JENKINS_URL} -o /usr/share/jenkins/jenkins.war \
   && echo "${JENKINS_SHA}  /usr/share/jenkins/jenkins.war" | sha256sum -c -   
     
+ENV JENKINS_UC https://updates.jenkins.io
+RUN chown -R ${user} "$JENKINS_HOME" /usr/share/jenkins/ref    
 
 # Download and install GlassFish
 RUN wget -q -O $GLASSFISH_PKG $GLASSFISH_URL && \
@@ -108,8 +110,7 @@ COPY glassfishpwd $GLASSFISH_HOME/
 
 
 
-ENV JENKINS_UC https://updates.jenkins.io
-RUN chown -R ${user} "$JENKINS_HOME" /usr/share/jenkins/ref
+
 
 # for main web interface:
 EXPOSE ${http_port}
