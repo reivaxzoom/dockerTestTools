@@ -1,4 +1,4 @@
-FROM openjdk:7u131-jdk
+FROM openjdk:8-jdk
 
 RUN apt-get update && apt-get install -y git curl && rm -rf /var/lib/apt/lists/*
 
@@ -9,11 +9,8 @@ ARG gid=1000
 ARG http_port=8080
 ARG agent_port=50000
 
-
-
 ENV JENKINS_HOME /var/jenkins_home
 ENV JENKINS_SLAVE_AGENT_PORT ${agent_port}
-ENV GLASSFISH_HOME /usr/local/glassfish3/
 
 # Jenkins is run with user `jenkins`, uid = 1000
 # If you bind mount a volume from the host or a data container, 
@@ -41,11 +38,10 @@ COPY init.groovy /usr/share/jenkins/ref/init.groovy.d/tcp-slave-agent-port.groov
 
 # jenkins version being bundled in this docker image
 ARG JENKINS_VERSION
-#ENV JENKINS_VERSION ${JENKINS_VERSION:-2.46.3}
-ENV JENKINS_VERSION ${JENKINS_VERSION:-2.60.1}
+ENV JENKINS_VERSION ${JENKINS_VERSION:-2.46.3}
 
 # jenkins.war checksum, download will be validated using it
-ARG JENKINS_SHA=1ab1c60b4659e709b2419817a20b2749e6bf29e5
+ARG JENKINS_SHA=00424d3c851298b29376d1d09d7d3578a2bc4a03acf3914b317c47707cd5739a
 
 # Can be used to customize where jenkins.war get downloaded from
 ARG JENKINS_URL=https://repo.jenkins-ci.org/public/org/jenkins-ci/main/jenkins-war/${JENKINS_VERSION}/jenkins-war-${JENKINS_VERSION}.war
@@ -77,7 +73,7 @@ ENV MAVEN_HOME /opt/maven
 # could use ADD but this one does not check Last-Modified header neither does it allow to control checksum 
 # see https://github.com/docker/docker/issues/8331
 RUN curl -fsSL ${JENKINS_URL} -o /usr/share/jenkins/jenkins.war \
-  && echo "${JENKINS_SHA}  /usr/share/jenkins/jenkins.war" | sha1sum -c -
+  && echo "${JENKINS_SHA}  /usr/share/jenkins/jenkins.war" | sha256sum -c -
 
 ENV JENKINS_UC https://updates.jenkins.io
 RUN chown -R ${user} "$JENKINS_HOME" /usr/share/jenkins/ref
@@ -87,44 +83,6 @@ EXPOSE ${http_port}
 
 # will be used by attached slave agents:
 EXPOSE ${agent_port}
-
-
-
-#Install glassfish for remote deployment
-ENV GLASSFISH_PKG=/tmp/glassfish-3.1.2.2.zip \
-    GLASSFISH_URL=http://download.java.net/glassfish/3.1.2.2/release/glassfish-3.1.2.2.zip \
-    GLASSFISH_HOME=/usr/local/glassfish3 \
-    MD5=ae8e17e9dcc80117cb4b39284302763f \
-    PATH=$PATH:/usr/local/glassfish3/bin
-
-
-# Download and install GlassFish
-RUN wget -q -O $GLASSFISH_PKG $GLASSFISH_URL && \
-    echo "$MD5 *$GLASSFISH_PKG" | md5sum -c -
-USER root
-RUN mkdir  $GLASSFISH_HOME 
-    
-RUN chown -R ${user} $GLASSFISH_HOME 
-
-
-  
-RUN unzip -o $GLASSFISH_PKG -d /usr/local 
-
-RUN rm -f $GLASSFISH_PKG && \
-    
-    # Remove Windows .bat and .exe files to save space
-    cd $GLASSFISH_HOME && \
-    find . -name '*.bat' -delete && \
-    find . -name '*.exe' -delete
-
-ENV PATH="/o"    
-COPY proteusConfig.txt $GLASSFISH_HOME/
-COPY glassfishpwd $GLASSFISH_HOME/    
-
-
-
-#starting entry secuence
-
 
 ENV COPY_REFERENCE_FILE_LOG $JENKINS_HOME/copy_reference_file.log
 
