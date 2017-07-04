@@ -35,8 +35,8 @@ services:
     #image: 'jenk-mvn-git-nex:v1'
     environment:
       JAVA_OPTS: "-Djava.awt.headless=true"
-    links:
-      - nexus 
+    # links:
+      # - nexus 
     ports:
       - "50000:50000"
       - "6090:8080"
