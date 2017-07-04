@@ -89,7 +89,7 @@ ENV COPY_REFERENCE_FILE_LOG $JENKINS_HOME/copy_reference_file.log
 USER ${user}
 COPY jenkins-support /usr/local/bin/jenkins-support
 COPY jenkins.sh /usr/local/bin/jenkins.sh
-
+ENTRYPOINT ["/bin/tini", "--", "/usr/local/bin/jenkins.sh"] 
 
 
 
@@ -98,6 +98,9 @@ COPY plugins.sh /usr/local/bin/plugins.sh
 COPY install-plugins.sh /usr/local/bin/install-plugins.sh
 COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
 RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/ref/plugins.txt
+   
+  
+   
    
 
 # Download and install GlassFish
@@ -117,8 +120,7 @@ ENV PATH="/o"
 COPY proteusConfig.txt $GLASSFISH_HOME/
 COPY glassfishpwd $GLASSFISH_HOME/
 
-USER ${user}
-ENTRYPOINT ["/bin/tini", "--", "/usr/local/bin/jenkins.sh"]
+
 
 
 
