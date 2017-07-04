@@ -88,3 +88,12 @@ services:
 # networks:
     # selenium_grid_internal:
       
+
+ elk:
+   image: sebp/elk
+   ports:
+     - "5601:5601"
+     - "9200:9200"
+     - "5044:5044"      
+      
+      

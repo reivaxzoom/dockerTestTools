@@ -34,8 +34,10 @@ ENV TINI_VERSION 0.14.0
 ENV TINI_SHA 6c41ec7d33e857d4779f14d9c74924cab0c7973485d2972419a3b7c7620ff5fd
 
 # Use tini as subreaper in Docker container to adopt zombie processes 
-RUN curl -fsSL https://github.com/krallin/tini/releases/download/v${TINI_VERSION}/tini-static-amd64 -o /bin/tini && chmod +x /bin/tini \
-  && echo "$TINI_SHA  /bin/tini" | sha256sum -c -
+#RUN curl -fsSL https://github.com/krallin/tini/releases/download/v${TINI_VERSION}/tini-static-amd64 -o /bin/tini && chmod +x /bin/tini && echo "$TINI_SHA  /bin/tini" | sha256sum -c -
+
+RUN curl -fsSL http://172.22.4.132:6091/repository/sigenComponents/v${TINI_VERSION}/tini-static-amd64 -o /bin/tini && chmod +x /bin/tini && echo "$TINI_SHA  /bin/tini" | sha256sum -c -
+
 
 COPY init.groovy /usr/share/jenkins/ref/init.groovy.d/tcp-slave-agent-port.groovy
 
@@ -48,7 +50,9 @@ ENV JENKINS_VERSION ${JENKINS_VERSION:-2.60.1}
 ARG JENKINS_SHA=1ab1c60b4659e709b2419817a20b2749e6bf29e5
 
 # Can be used to customize where jenkins.war get downloaded from
-ARG JENKINS_URL=https://repo.jenkins-ci.org/public/org/jenkins-ci/main/jenkins-war/${JENKINS_VERSION}/jenkins-war-${JENKINS_VERSION}.war
+#ARG JENKINS_URL=https://repo.jenkins-ci.org/public/org/jenkins-ci/main/jenkins-war/${JENKINS_VERSION}/jenkins-war-${JENKINS_VERSION}.war
+ARG JENKINS_URL=http://172.22.4.132:6091/repository/sigenComponents/jenkins-war/${JENKINS_VERSION}/jenkins-war-${JENKINS_VERSION}.war
+
 
 
 # install wget y curl 
@@ -56,7 +60,8 @@ RUN apt-get install -y wget curl
 # set shell variables for java installation 
 ENV maven_version 3.3.9 
 # get maven 3.3.9 
-RUN wget --no-verbose -O /tmp/apache-maven-$maven_version.tar.gz http://ftp.cixug.es/apache/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz
+#RUN wget --no-verbose -O /tmp/apache-maven-$maven_version.tar.gz http://ftp.cixug.es/apache/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz
+RUN wget --no-verbose -O /tmp/apache-maven-$maven_version.tar.gz http://172.22.4.132:6091/repository/sigenComponents/apache-maven-3.3.9-bin.tar.gz
 
 
 # install nano
