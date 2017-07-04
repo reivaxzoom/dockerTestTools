@@ -40,7 +40,7 @@ COPY init.groovy /usr/share/jenkins/ref/init.groovy.d/tcp-slave-agent-port.groov
 
 # jenkins version being bundled in this docker image
 ARG JENKINS_VERSION
-ENV JENKINS_VERSION ${JENKINS_VERSION:-2.46.3}
+ENV JENKINS_VERSION ${JENKINS_VERSION:-2.60.1}
 
 # jenkins.war checksum, download will be validated using it
 ARG JENKINS_SHA=00424d3c851298b29376d1d09d7d3578a2bc4a03acf3914b317c47707cd5739a
@@ -56,8 +56,8 @@ RUN apt-get install -y wget curl
 # set shell variables for java installation 
 ENV maven_version 3.3.9 
 # get maven 3.3.9 
-#RUN wget --no-verbose -O /tmp/apache-maven-$maven_version.tar.gz http://ftp.cixug.es/apache/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz
-RUN wget --no-verbose -O /tmp/apache-maven-$maven_version.tar.gz http://172.22.4.132:6091/repository/sigenComponents/apache-maven-3.3.9-bin.tar.gz
+RUN wget --no-verbose -O /tmp/apache-maven-$maven_version.tar.gz http://ftp.cixug.es/apache/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz
+#RUN wget --no-verbose -O /tmp/apache-maven-$maven_version.tar.gz http://172.22.4.132:6091/repository/sigenComponents/apache-maven-3.3.9-bin.tar.gz
 
 
 # install nano
