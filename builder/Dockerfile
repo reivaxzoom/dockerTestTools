@@ -46,8 +46,8 @@ ENV JENKINS_VERSION ${JENKINS_VERSION:-2.60.1}
 ARG JENKINS_SHA=00424d3c851298b29376d1d09d7d3578a2bc4a03acf3914b317c47707cd5739a
 
 # Can be used to customize where jenkins.war get downloaded from
-#ARG JENKINS_URL=https://repo.jenkins-ci.org/public/org/jenkins-ci/main/jenkins-war/${JENKINS_VERSION}/jenkins-war-${JENKINS_VERSION}.war
-ARG JENKINS_URL=http://172.22.4.132:6091/repository/sigenComponents/jenkins-war/2.60.1/jenkins-war-2.60.1.war
+ARG JENKINS_URL=https://repo.jenkins-ci.org/public/org/jenkins-ci/main/jenkins-war/${JENKINS_VERSION}/jenkins-war-${JENKINS_VERSION}.war
+#ARG JENKINS_URL=http://172.22.4.132:6091/repository/sigenComponents/jenkins-war/2.60.1/jenkins-war-2.60.1.war
 
 
 
