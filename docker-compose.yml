@@ -20,8 +20,13 @@ services:
     # volumes:
      # - '/home/ingsoluciones/builder-TesterComposeDocker/repo/installers:/var/www:ro' 
 
-
-
+ git:
+   build: ./repoCode
+   ports:
+     - "2222:22"
+   #volumes:
+     #- /opt/dockerVol/gitData:   
+ 
  # nexus:
    # #build: ./repoDepend
    # image: sonatype/nexus3
@@ -30,19 +35,19 @@ services:
    # volumes:
      # - /opt/dockerVol/nexusData:/sonatype-work
 
- jenkins:
-    build: ./builder
-    #image: 'jenk-mvn-git-nex:v1'
-    environment:
-      JAVA_OPTS: "-Djava.awt.headless=true"
-    # links:
-      # - nexus 
-    ports:
-      - "50000:50000"
-      - "6090:8080"
-    volumes:
-      - /opt/dockerVol/jenkinsData/jobs:/var/jenkins_home/jobs
-      #- /opt/dockerVol/glassfish/Autodeploy:/opt/dockerVol/glassfish/deploy
+ # jenkins:
+    # build: ./builder
+    # #image: 'jenk-mvn-git-nex:v1'
+    # environment:
+      # JAVA_OPTS: "-Djava.awt.headless=true"
+    # # links:
+      # # - nexus 
+    # ports:
+      # - "50000:50000"
+      # - "6090:8080"
+    # volumes:
+      # - /opt/dockerVol/jenkinsData/jobs:/var/jenkins_home/jobs
+      # #- /opt/dockerVol/glassfish/Autodeploy:/opt/dockerVol/glassfish/deploy
 
  # selenium_hub:
     # image: selenium/hub
@@ -89,11 +94,11 @@ services:
     # selenium_grid_internal:
       
 
- elk:
-   image: sebp/elk
-   ports:
-     - "5601:5601"
-     - "9200:9200"
-     - "5044:5044"      
+# elk:
+#   image: sebp/elk
+#   ports:
+#     - "5601:5601"
+#     - "9200:9200"
+#     - "5044:5044"      
       
       
