@@ -1,4 +1,5 @@
-FROM openjdk:8-jdk
+#FROM openjdk:8-jdk
+FROM openjdk:7u121-jdk-alpine
 
 RUN apt-get update && apt-get install -y git curl && rm -rf /var/lib/apt/lists/*
 
@@ -103,5 +104,29 @@ COPY install-plugins.sh /usr/local/bin/install-plugins.sh
 COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
 RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/ref/plugins.txt
 
-
 #RUN chmod +x plugins.sh active.txt
+
+#Install glassfish for remote deployment
+ENV GLASSFISH_PKG=/tmp/glassfish-3.1.2.2.zip \
+    GLASSFISH_URL=http://download.java.net/glassfish/3.1.2.2/release/glassfish-3.1.2.2.zip \
+    GLASSFISH_HOME=/usr/local/glassfish3 \
+    MD5=ae8e17e9dcc80117cb4b39284302763f \
+    PATH=$PATH:/usr/local/glassfish3/bin
+
+# Download and install GlassFish
+RUN wget -q -O $GLASSFISH_PKG $GLASSFISH_URL && \
+    echo "$MD5 *$GLASSFISH_PKG" | md5sum -c -
+USER root
+RUN mkdir  $GLASSFISH_HOME 
+RUN chown -R ${user} $GLASSFISH_HOME 
+RUN unzip -o $GLASSFISH_PKG -d /usr/local 
+RUN rm -f $GLASSFISH_PKG && \
+    
+    # Remove Windows .bat and .exe files to save space
+    cd $GLASSFISH_HOME && \
+    find . -name '*.bat' -delete && \
+    find . -name '*.exe' -delete
+ENV PATH="/o"    
+COPY proteusConfig.txt $GLASSFISH_HOME/
+COPY glassfishpwd $GLASSFISH_HOME/    
+
