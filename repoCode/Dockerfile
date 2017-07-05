@@ -10,6 +10,7 @@ RUN sed -i "s/#PasswordAuthentication yes/PasswordAuthentication no/" /etc/ssh/s
 
 # Adding git user
 RUN adduser --system git
+RUN echo "git:docker!" | chpasswd
 RUN mkdir -p /home/git/.ssh
 
 # Clearing and setting authorized ssh keys
