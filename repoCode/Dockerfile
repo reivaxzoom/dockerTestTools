@@ -1,8 +1,8 @@
 FROM ubuntu:16.04
 
-RUN apt-get -y update
-RUN apt-get -y install openssh-server
-RUN apt-get -y install git
+RUN apt-get update
+RUN apt-get install openssh-server
+RUN apt-get install git
 
 # Setting openssh
 RUN mkdir /var/run/sshd
