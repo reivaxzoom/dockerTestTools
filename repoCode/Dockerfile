@@ -1,7 +1,7 @@
-FROM ubuntu:16.04
+FROM ubuntu:14.04
 
-RUN apt-get -y update 
-RUN apt-get -y install openssh-server 
+RUN apt-get -y update
+RUN apt-get -y install openssh-server
 RUN apt-get -y install git
 
 # Setting openssh
