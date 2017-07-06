@@ -16,9 +16,9 @@ services:
    # #build : ./repo
     # image: trinitronx/python-simplehttpserver
     # ports: 
-     # - '9091:8080'
+    # - '9091:8080'
     # volumes:
-     # - '/home/ingsoluciones/builder-TesterComposeDocker/repo/installers:/var/www:ro' 
+     # - /home/ingsoluciones/builder-TesterComposeDocker/repo/installers:/var/www:ro
 
  git:
    build: ./repoCode
