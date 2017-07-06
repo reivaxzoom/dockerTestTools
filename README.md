@@ -1,7 +1,7 @@
-# dockerTestTools
+## dockerTestTools
 Setting up an test and stage enviroment for deploymets
 
-#install docker
+# install docker
 ``` yum install docker ```
 
 #install docker compose
@@ -15,14 +15,14 @@ sudo pip install docker-compose
  systemctl enable docker
 ```
 
-#accessing git docker
+# accessing git docker
 ```
 ssh  -l root  -p 2222  root@192.168.99.100 -o StrictHostKeyChecking=no
 git clone ssh://root@192.168.99.100:2222/home/repos/sampleProject
 
 ```
 
-How to create a new repo:
+# How to create a new repo:
 ```
 $ cd myrepo
 $ git init --shared=true
@@ -31,7 +31,7 @@ $ git commit -m "my first commit"
 $ cd ..
 $ git clone --bare myrepo myrepo.git
 ```
-How to upload a repo:
+# How to upload a repo:
 
 From host:
 ```$ mv myrepo.git ~/git-server/repos```
