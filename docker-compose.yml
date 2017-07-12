@@ -49,17 +49,17 @@ services:
       # - /opt/dockerVol/jenkinsData/jobs:/var/jenkins_home/jobs
       # #- /opt/dockerVol/glassfish/Autodeploy:/opt/dockerVol/glassfish/deploy
 
- # selenium_hub:
-    # image: selenium/hub
-    # container_name: selenium_hub
-    # privileged: true
-    # ports:
-      # - 4444:4444
-    # environment:
-      # - GRID_TIMEOUT=120000
-      # - GRID_BROWSER_TIMEOUT=120000
-    # networks:
-        # - selenium_grid_internal
+ selenium_hub:
+    image: selenium/hub
+    container_name: selenium_hub
+    privileged: true
+    ports:
+      - 4444:4444
+    environment:
+      - GRID_TIMEOUT=120000
+      - GRID_BROWSER_TIMEOUT=120000
+    networks:
+        - selenium_grid_internal
 
  # nodechrome:
     # image: selenium/node-chrome-debug
@@ -76,22 +76,22 @@ services:
     # networks:
       # - selenium_grid_internal
 
- # nodefirefox:
-    # image: selenium/node-firefox-debug
-    # privileged: true
-    # depends_on:
-       # - selenium_hub
-    # ports:
-       # - 5900
-    # environment:
-       # - no_proxy=localhost
-       # - TZ=Europe/London
-       # - HUB_PORT_4444_TCP_ADDR=selenium_hub
-       # - HUB_PORT_4444_TCP_PORT=4444
-    # networks:
-       # - selenium_grid_internal
-# networks:
-    # selenium_grid_internal:
+ nodefirefox:
+    image: selenium/node-firefox-debug
+    privileged: true
+    depends_on:
+       - selenium_hub
+    ports:
+       - 5900
+    environment:
+       - no_proxy=localhost
+       - TZ=Europe/London
+       - HUB_PORT_4444_TCP_ADDR=selenium_hub
+       - HUB_PORT_4444_TCP_PORT=4444
+    networks:
+       - selenium_grid_internal
+networks:
+    selenium_grid_internal:
       
 
 # elk:
