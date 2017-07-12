@@ -50,7 +50,7 @@ services:
       # #- /opt/dockerVol/glassfish/Autodeploy:/opt/dockerVol/glassfish/deploy
 
  elk:
-   image: sebp/elk
+   image: sebp/elkx:520
    ports:
      - 5601:5601
      - 9200:9200
