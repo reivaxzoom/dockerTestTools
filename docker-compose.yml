@@ -69,6 +69,14 @@ services:
     networks:
         - selenium_grid_internal
 
+        
+ nodeff:  
+  image: selenium/node-firefox-debug
+  ports:
+    - 5900
+  networks:
+        - selenium_grid_internal    
+    
  # nodechrome:
     # image: selenium/node-chrome-debug
     # privileged: true
