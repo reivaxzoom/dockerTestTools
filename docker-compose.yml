@@ -49,12 +49,12 @@ services:
       # - /opt/dockerVol/jenkinsData/jobs:/var/jenkins_home/jobs
       # #- /opt/dockerVol/glassfish/Autodeploy:/opt/dockerVol/glassfish/deploy
 
-  elk:
+ elk:
    image: sebp/elk
    ports:
-     - "5601:5601"
-     - "9200:9200"
-     - "5044:5044"        
+     - 5601:5601
+     - 9200:9200
+     - 5044:5044
       
       
  selenium_hub:
