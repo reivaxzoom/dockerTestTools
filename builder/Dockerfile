@@ -1,4 +1,6 @@
-FROM openjdk:8-jdk
+#FROM openjdk:8-jdk
+FROM openjdk:7u121-jdk-alpine
+
 
 RUN apt-get update && apt-get install -y git curl && rm -rf /var/lib/apt/lists/*
 
