@@ -1,5 +1,5 @@
-FROM openjdk:8-jdk
-#FROM openjdk:7u111-jdk
+#FROM openjdk:8-jdk
+FROM openjdk:7u111-jdk
 
 
 RUN apt-get update && apt-get install -y git curl && rm -rf /var/lib/apt/lists/*
@@ -40,10 +40,13 @@ COPY init.groovy /usr/share/jenkins/ref/init.groovy.d/tcp-slave-agent-port.groov
 
 # jenkins version being bundled in this docker image
 ARG JENKINS_VERSION
-ENV JENKINS_VERSION ${JENKINS_VERSION:-2.60.1}
+#ENV JENKINS_VERSION ${JENKINS_VERSION:-2.60.1}
+ENV JENKINS_VERSION ${JENKINS_VERSION:-2.46.3}
 
 # jenkins.war checksum, download will be validated using it
-ARG JENKINS_SHA=1ab1c60b4659e709b2419817a20b2749e6bf29e5
+#ARG JENKINS_SHA=1ab1c60b4659e709b2419817a20b2749e6bf29e5
+ARG JENKINS_SHA=00424d3c851298b29376d1d09d7d3578a2bc4a03acf3914b317c47707cd5739a
+
 
 # Can be used to customize where jenkins.war get downloaded from
 ARG JENKINS_URL=https://repo.jenkins-ci.org/public/org/jenkins-ci/main/jenkins-war/${JENKINS_VERSION}/jenkins-war-${JENKINS_VERSION}.war
@@ -74,8 +77,11 @@ ENV MAVEN_HOME /opt/maven
 
 # could use ADD but this one does not check Last-Modified header neither does it allow to control checksum 
 # see https://github.com/docker/docker/issues/8331
+#RUN curl -fsSL ${JENKINS_URL} -o /usr/share/jenkins/jenkins.war \
+#  && echo "${JENKINS_SHA}  /usr/share/jenkins/jenkins.war" | sha1sum -c -
+  
 RUN curl -fsSL ${JENKINS_URL} -o /usr/share/jenkins/jenkins.war \
-  && echo "${JENKINS_SHA}  /usr/share/jenkins/jenkins.war" | sha1sum -c -
+  && echo "${JENKINS_SHA}  /usr/share/jenkins/jenkins.war" | sha256sum -c   
 
 ENV JENKINS_UC https://updates.jenkins.io
 RUN chown -R ${user} "$JENKINS_HOME" /usr/share/jenkins/ref
