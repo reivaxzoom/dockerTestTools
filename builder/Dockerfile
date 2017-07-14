@@ -119,10 +119,11 @@ ENV GLASSFISH_PKG=/tmp/glassfish-3.1.2.2.zip \
 USER root
 
 # Download and install GlassFish
-RUN wget -q -O $GLASSFISH_PKG $GLASSFISH_URL && \
-    mkdir ${GLASSFISH_HOME}
-RUN echo "$MD5 *$GLASSFISH_PKG" | md5sum -c - && \
-    chown -R ${user} ${GLASSFISH_HOME}
+RUN wget -q -O $GLASSFISH_PKG $GLASSFISH_URL 
+    
+RUN mkdir ${GLASSFISH_HOME} && \ 
+    echo "$MD5 *$GLASSFISH_PKG" | md5sum -c - && \
+    
     unzip -o $GLASSFISH_PKG -d /usr/local && \
     rm -f $GLASSFISH_PKG && \
     \
