@@ -121,7 +121,7 @@ USER root
 # Download and install GlassFish
 RUN wget -q -O $GLASSFISH_PKG $GLASSFISH_URL && \
     echo "$MD5 *$GLASSFISH_PKG" | md5sum -c - && \
-    chmod 777 $GLASSFISH_PKG && \ 
+    chown -R ${user} $GLASSFISH_HOME
     unzip -o $GLASSFISH_PKG -d /usr/local && \
     rm -f $GLASSFISH_PKG && \
     \
