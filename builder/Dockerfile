@@ -133,7 +133,9 @@ RUN mkdir ${GLASSFISH_HOME} && \
     find . -name '*.exe' -delete
     
 COPY proteusConfig.txt $GLASSFISH_HOME/
-COPY glassfishpwd $GLASSFISH_HOME/    
+COPY glassfishpwd $GLASSFISH_HOME/
+
+#RUN ${GLASSFISH_HOME}/glassfish/bin asadmin --file ${GLASSFISH_HOME}/proteusConfig.txt
 
 
 
