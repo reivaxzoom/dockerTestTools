@@ -47,4 +47,7 @@ COPY glassfishpwd $GLASSFISH_HOME/
 CMD ["asadmin", "start-domain", "--verbose"]
 
 
+#Install file beats to connect with kibana
+#curl -L -O https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-5.0.2-amd64.deb
+#sudo dpkg -i filebeat-5.0.2-amd64.deb
 
