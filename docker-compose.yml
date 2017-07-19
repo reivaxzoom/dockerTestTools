@@ -39,7 +39,6 @@ services:
      build: ./builder
      #image: 'jenk-mvn-git-nex:v1'
      environment:
-<<<<<<< HEAD
        JAVA_OPTS: "-Djava.awt.headless=true"
     # # links:
       # # - nexus 
