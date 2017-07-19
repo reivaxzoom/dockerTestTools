@@ -1,5 +1,5 @@
-#FROM openjdk:8-jdk
-FROM openjdk:7u111-jdk
+FROM openjdk:8-jdk
+#FROM openjdk:7u111-jdk
 
 
 RUN apt-get update && apt-get install -y git curl && rm -rf /var/lib/apt/lists/*
@@ -109,12 +109,21 @@ RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/ref/plugins.txt
 
 #RUN chmod +x plugins.sh active.txt
 
+# #Install glassfish for remote deployment
+# ENV GLASSFISH_PKG=/tmp/glassfish-3.1.2.2.zip \
+    # GLASSFISH_URL=http://download.java.net/glassfish/3.1.2.2/release/glassfish-3.1.2.2.zip \
+    # GLASSFISH_HOME=/opt/glassfish3 \
+    # MD5=ae8e17e9dcc80117cb4b39284302763f \
+    # PATH=$PATH:/usr/local/glassfish3/bin
+    
 #Install glassfish for remote deployment
-ENV GLASSFISH_PKG=/tmp/glassfish-3.1.2.2.zip \
-    GLASSFISH_URL=http://download.java.net/glassfish/3.1.2.2/release/glassfish-3.1.2.2.zip \
-    GLASSFISH_HOME=/opt/glassfish3 \
-    MD5=ae8e17e9dcc80117cb4b39284302763f \
-    PATH=$PATH:/usr/local/glassfish3/bin
+ENV GLASSFISH_PKG=/tmp/glassfish-4.0.zip \
+    GLASSFISH_URL=http://download.java.net/glassfish/4.0/release/glassfish-4.0.zip \
+    GLASSFISH_HOME=/opt/glassfish4 \
+    #MD5=ae8e17e9dcc80117cb4b39284302763f \
+    PATH=$PATH:/usr/local/glassfish3/bin    
+    
+    
 
 USER root
 
@@ -122,7 +131,8 @@ USER root
 RUN wget -q -O $GLASSFISH_PKG $GLASSFISH_URL 
     
 RUN mkdir ${GLASSFISH_HOME} && \ 
-    echo "$MD5 *$GLASSFISH_PKG" | md5sum -c - && \
+    echo "$MD5 *$GLASSFISH_PKG" 
+    #| md5sum -c - && \
     
     unzip -o $GLASSFISH_PKG -d /opt/ && \
     rm -f $GLASSFISH_PKG && \
