@@ -131,7 +131,7 @@ USER root
 RUN wget -q -O $GLASSFISH_PKG $GLASSFISH_URL 
     
 RUN mkdir ${GLASSFISH_HOME} && \ 
-    echo "$MD5 *$GLASSFISH_PKG" 
+    echo "$MD5 *$GLASSFISH_PKG" && \
     #| md5sum -c - && \
     
     unzip -o $GLASSFISH_PKG -d /opt/ && \
