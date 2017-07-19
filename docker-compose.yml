@@ -39,6 +39,7 @@ services:
      build: ./builder
      #image: 'jenk-mvn-git-nex:v1'
      environment:
+<<<<<<< HEAD
        JAVA_OPTS: "-Djava.awt.headless=true"
     # # links:
       # # - nexus 
@@ -47,69 +48,71 @@ services:
        - "6090:8080"
        - "4848:4848"
        - "8080:9090"
-    # volumes:
-      # - /opt/dockerVol/jenkinsData/jobs:/var/jenkins_home/jobs
-      # #- /opt/dockerVol/glassfish/Autodeploy:/opt/dockerVol/glassfish/deploy
 
- elk:
-   image: sebp/elkx:520
-   ports:
-     - 5601:5601
-     - 9200:9200
-     - 5044:5044
-      
-      
- selenium_hub:
-    image: selenium/hub
-    container_name: selenium_hub
-    privileged: true
-    ports:
-      - 4444:4444
-    environment:
-      - GRID_TIMEOUT=120000
-      - GRID_BROWSER_TIMEOUT=120000
-    networks:
-        - selenium_grid_internal
+     volumes:
+       - /opt/dockerVol/jenkinsData/jobs:/var/jenkins_home/jobs
+      #- /opt/dockerVol/glassfish/Autodeploy:/opt/dockerVol/glassfish/deploy
+
+
+ # elk:
+   # image: sebp/elkx:520
+   # ports:
+     # - 5601:5601
+     # - 9200:9200
+     # - 5044:5044
+
+ # selenium_hub:
+    # image: selenium/hub
+    # container_name: selenium_hub
+    # privileged: true
+    # ports:
+      # - 4444:4444
+    # environment:
+      # - GRID_TIMEOUT=120000
+      # - GRID_BROWSER_TIMEOUT=120000
+    # networks:
+        # - selenium_grid_internal
 
         
- nodeff:  
-  image: selenium/node-firefox-debug
-  ports:
-    - 5900
-  networks:
-        - selenium_grid_internal    
+ # nodeff:  
+  # image: selenium/node-firefox-debug
+  # ports:
+    # - 5900
+  # networks:
+        # - selenium_grid_internal    
     
- # nodechrome:
-    # image: selenium/node-chrome-debug
+ # # nodechrome:
+    # # image: selenium/node-chrome-debug
+    # # privileged: true
+    # # depends_on:
+      # # - selenium_hub
+    # # ports:
+      # # - 5900
+    # # environment:
+      # # - no_proxy=localhost
+      # # - TZ=Europe/London
+      # # - HUB_PORT_4444_TCP_ADDR=selenium_hub
+      # # - HUB_PORT_4444_TCP_PORT=4444
+    # # networks:
+      # # - selenium_grid_internal
+
+ # nodefirefox:
+    # image: selenium/node-firefox-debug
     # privileged: true
     # depends_on:
-      # - selenium_hub
+       # - selenium_hub
     # ports:
-      # - 5900
+       # - 5900
     # environment:
-      # - no_proxy=localhost
-      # - TZ=Europe/London
-      # - HUB_PORT_4444_TCP_ADDR=selenium_hub
-      # - HUB_PORT_4444_TCP_PORT=4444
+       # - no_proxy=localhost
+       # - TZ=Europe/London
+       # - HUB_PORT_4444_TCP_ADDR=selenium_hub
+       # - HUB_PORT_4444_TCP_PORT=4444
     # networks:
-      # - selenium_grid_internal
+       # - selenium_grid_internal
+# networks:
+    # selenium_grid_internal:
 
- nodefirefox:
-    image: selenium/node-firefox-debug
-    privileged: true
-    depends_on:
-       - selenium_hub
-    ports:
-       - 5900
-    environment:
-       - no_proxy=localhost
-       - TZ=Europe/London
-       - HUB_PORT_4444_TCP_ADDR=selenium_hub
-       - HUB_PORT_4444_TCP_PORT=4444
-    networks:
-       - selenium_grid_internal
-networks:
-    selenium_grid_internal:
       
 
    
