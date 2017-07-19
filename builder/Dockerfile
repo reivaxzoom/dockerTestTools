@@ -135,7 +135,8 @@ RUN mkdir ${GLASSFISH_HOME} && \
 COPY proteusConfig.txt $GLASSFISH_HOME/
 COPY glassfishpwd $GLASSFISH_HOME/
 
-#RUN ${GLASSFISH_HOME}/glassfish/bin asadmin --file ${GLASSFISH_HOME}/proteusConfig.txt
+RUN ${GLASSFISH_HOME}/glassfish/bin asadmin --file ${GLASSFISH_HOME}/proteusConfig.txt
+
 
 
 
