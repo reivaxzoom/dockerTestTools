@@ -20,20 +20,13 @@ services:
     # volumes:
      # - /home/ingsoluciones/builder-TesterComposeDocker/repo/installers:/var/www:ro
 
- # git:
-   # build: ./repoCode
-   # ports:
-     # - "2222:22"
-   # #volumes:
-     # #- /opt/dockerVol/gitData:   
- 
  # nexus:
-   # #build: ./repoDepend
+  #  #build: ./repoDepend
    # image: sonatype/nexus3
    # ports:
-     # - "6091:8081"
+   #   - "6091:8081"
    # volumes:
-     # - /opt/dockerVol/nexusData:/sonatype-work
+   #  - /opt/dockerVol/nexusData:/sonatype-work
 
   jenkins:
      build: ./builder
