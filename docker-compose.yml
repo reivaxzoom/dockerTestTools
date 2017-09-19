@@ -1,17 +1,13 @@
 version: "2"
 
 services:
- # glassfish:
-   # build: ./server
-   # #image: glassfish3:v4
-   # ports:
-     # - "8080:8080"
-     # - "4848:4848"
-     # - "222:22"
-    # # - "9999-15000:9999-15000"
-   # #volumes:
-   # #  - /opt/dockerVol/glassfish/autodeploy:/usr/local/glassfish3/glassfish/domains/domain1/autodeploy
-
+  glassfish:
+    build: ./server
+    #image: glassfish3:v4
+    ports:
+      - "8080:8080"
+      - "4848:4848"
+     
  # apache:
    # #build : ./repo
     # image: trinitronx/python-simplehttpserver
@@ -38,14 +34,12 @@ services:
      ports:
        - "50000:50000"
        - "6090:8080"
-       - "4848:4848"
-       - "8080:9090"
+      # - "4848:4848"
+      # - "8080:9090"
 
      volumes:
        - /opt/dockerVol/jenkinsData/jobs:/var/jenkins_home/jobs
-      #- /opt/dockerVol/glassfish/Autodeploy:/opt/dockerVol/glassfish/deploy
-
-
+      
  # elk:
    # image: sebp/elkx:520
    # ports:
