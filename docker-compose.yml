@@ -1,12 +1,12 @@
 version: "2"
 
 services:
-  glassfish:
-    build: ./server
-    #image: glassfish3:v4
-    ports:
-      - "8080:8080"
-      - "4848:4848"
+ # glassfish:
+ #   build: ./server
+ #   #image: glassfish3:v4
+ #   ports:
+ #     - "8080:8080"
+ #     - "4848:4848"
      
  # apache:
    # #build : ./repo
@@ -27,6 +27,7 @@ services:
   jenkins:
      build: ./builder
      #image: 'jenk-mvn-git-nex:v1'
+     #image: jenkins
      environment:
        JAVA_OPTS: "-Djava.awt.headless=true"
     # # links:
@@ -38,8 +39,20 @@ services:
       # - "8080:9090"
 
      volumes:
-       - /opt/dockerVol/jenkinsData/jobs:/var/jenkins_home/jobs
-      
+       - /opt/dockerVol/jenkinsData/jobs:/var/jenkins_home/jobs:Z
+
+
+  swaggerEditor:
+    image: swaggerapi/swagger-editor
+    ports:
+      - 9393:8080
+
+
+  swaggerUI:
+    image:  swaggerapi/swagger-ui
+    ports:
+      - 9494:8080
+
  # elk:
    # image: sebp/elkx:520
    # ports:
