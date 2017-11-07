@@ -25,7 +25,7 @@ sudo yum-config-manager \
 
 
 ## install docker
-``` yum install docker ```
+``` sudo yum install docker ```
 
 ## install docker compose
 ```
