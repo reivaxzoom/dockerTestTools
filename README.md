@@ -1,6 +1,29 @@
 # dockerTestTools
 Setting up an test and stage enviroment for deploymets
 
+## remove old versions 
+```
+$ sudo yum remove docker \
+                  docker-common \
+                  docker-selinux \
+                  docker-engine
+```
+
+## install requiered packages
+```
+ sudo yum install -y yum-utils \
+  device-mapper-persistent-data \
+  lvm2
+```
+
+## install stable repository
+```
+sudo yum-config-manager \
+    --add-repo \
+    https://download.docker.com/linux/centos/docker-ce.repo
+```
+
+
 ## install docker
 ``` yum install docker ```
 
