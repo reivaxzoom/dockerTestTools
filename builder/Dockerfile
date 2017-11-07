@@ -141,6 +141,8 @@ RUN mkdir ${GLASSFISH_HOME} && \
 COPY proteusConfig.txt $GLASSFISH_HOME/
 COPY glassfishpwd $GLASSFISH_HOME/
 
+RUN wget --no-check-certificate --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/7u79-b15/jdk-7u79-linux-x64.tar.gz
+RUN tar -xvf  jdk-7u79-linux-x64.tar.gz
 #RUN ${GLASSFISH_HOME}/glassfish/bin asadmin --file ${GLASSFISH_HOME}/proteusConfig.txt
 
 
