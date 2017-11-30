@@ -1,12 +1,12 @@
 version: "2"
 
 services:
- # glassfish:
- #   build: ./server
- #   #image: glassfish3:v4
- #   ports:
- #     - "8080:8080"
- #     - "4848:4848"
+  glassfish:
+    #build: ./server
+    image: glassfish:4.1-jdk8
+    ports:
+      - "9191:8080"
+      - "5858:4848"
      
  # apache:
    # #build : ./repo
@@ -35,9 +35,7 @@ services:
      ports:
        - "50000:50000"
        - "6090:8080"
-      # - "4848:4848"
-      # - "8080:9090"
-
+      
      volumes:
        - /opt/dockerVol/jenkinsData/jobs:/var/jenkins_home/jobs:Z
 
